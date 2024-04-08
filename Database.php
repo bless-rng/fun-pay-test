@@ -20,7 +20,7 @@ class Database implements DatabaseInterface
     public function buildQuery(string $query, array $args = []): string
     {
         $regex = '/({.*?}|\?d|\?f|\?a|\?#|\?)/';
-        $parts = preg_split($regex, $query, -1, PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
+        $parts = preg_split($regex, $query, -1, PREG_SPLIT_DELIM_CAPTURE);
         if (($expectedCount = intdiv(count($parts), 2)) !== ($passedCount = count($args))) {
             throw new InvalidArgumentException(sprintf("query expect %d arguments but %d passed.", $expectedCount, $passedCount));
         }
